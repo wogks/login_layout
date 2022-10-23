@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:login_layout/presentation/auth_screen/auth_screen.dart';
+import 'package:login_layout/util/screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
-  static final String pageName = 'MyHomeScreen';
-  
+  static const String pageName = 'MyHomeScreen';
+
   const MyHomePage({super.key, required this.title});
 
   final String title;
@@ -24,6 +27,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              Provider.of<ScreenNotifier>(context, listen: false)
+                  .goToOtherPage(AuthScreen.pageName);
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
         title: Text(widget.title),
       ),
       body: Center(
