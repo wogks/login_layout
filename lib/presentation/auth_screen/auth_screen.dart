@@ -8,7 +8,7 @@ class AuthScreen extends Page {
   @override
   Route createRoute(BuildContext context) {
     return MaterialPageRoute(
-      settings: this,//기본 셋팅일때는 this
+      settings: this, //기본 셋팅일때는 this
       builder: (context) => const AuthWidget(),
     );
   }
@@ -27,11 +27,14 @@ class _AuthWidgetState extends State<AuthWidget> {
     return Material(
       child: InkWell(
         onTap: () {
-                Provider.of<ScreenNotifier>(context, listen: false)
-                    .goToMain();
-              },
+          Provider.of<ScreenNotifier>(context, listen: false).goToMain();
+        },
         child: Container(
-          color: Colors.amberAccent,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/image.gif'),
+          )),
         ),
       ),
     );
