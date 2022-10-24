@@ -48,6 +48,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             child: Form(
               key: _formKey,
               child: ListView(
+                reverse: true,
                 padding: const EdgeInsets.all(16),
                 children: [
                   const SizedBox(height: 16),
@@ -96,9 +97,17 @@ class _AuthWidgetState extends State<AuthWidget> {
                   _buildTextFormField('Email Address', _emailController),
                   const SizedBox(height: 8),
                   _buildTextFormField('Passord', _passwordController),
-                  const SizedBox(height: 8),
-                  _buildTextFormField(
-                      'Confirm Password', _confirmPasswordController),
+                  AnimatedContainer(
+                      curve: Curves.fastOutSlowIn,
+                      duration: const Duration(milliseconds: 300),
+                      height: isRegister ? 8 : 0),
+                  AnimatedContainer(
+                    height: isRegister ? 60 : 0,
+                    curve: Curves.fastOutSlowIn,
+                    duration: const Duration(milliseconds: 300),
+                    child: _buildTextFormField(
+                        'Confirm Password', _confirmPasswordController),
+                  ),
                   const SizedBox(height: 16),
                   TextButton(
                       onPressed: () {
@@ -110,12 +119,17 @@ class _AuthWidgetState extends State<AuthWidget> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           backgroundColor: Colors.white54),
-                      child: const Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.black),
-                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: isRegister
+                            ? const Text(
+                                'Register',
+                                style: TextStyle(color: Colors.black),
+                              )
+                            : const Text(
+                                'Login',
+                                style: TextStyle(color: Colors.black),
+                              ),
                       )),
                   const SizedBox(height: 16),
                   const Divider(
@@ -131,7 +145,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                       _buildSocialbutton('assets/apple.png', () {})
                     ],
                   )
-                ],
+                ].reversed.toList(),
               ),
             ),
           ),
@@ -166,17 +180,22 @@ class _AuthWidgetState extends State<AuthWidget> {
       style: const TextStyle(color: Colors.white),
       cursorColor: Colors.white,
       decoration: InputDecoration(
-          errorStyle:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          errorBorder: _border.copyWith(
-              borderSide: const BorderSide(color: Colors.black, width: 3)),
-          filled: true,
-          fillColor: Colors.black45,
-          labelText: labelText,
-          border: _border,
-          enabledBorder: _border,
-          focusedBorder: _border,
-          labelStyle: const TextStyle(color: Colors.white)),
+        errorStyle:
+            const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        errorBorder: _border.copyWith(
+          borderSide: const BorderSide(
+            color: Colors.black,
+            width: 3,
+          ),
+        ),
+        filled: true,
+        fillColor: Colors.black45,
+        labelText: labelText,
+        border: _border,
+        enabledBorder: _border,
+        focusedBorder: _border,
+        labelStyle: const TextStyle(color: Colors.white),
+      ),
     );
   }
 }
