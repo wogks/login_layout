@@ -21,6 +21,7 @@ class AuthWidget extends StatefulWidget {
 }
 
 class _AuthWidgetState extends State<AuthWidget> {
+  bool isRegister = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final OutlineInputBorder _border = OutlineInputBorder(
@@ -55,6 +56,43 @@ class _AuthWidgetState extends State<AuthWidget> {
                       radius: 36,
                       child: Image.asset('assets/iconn.png')),
                   const SizedBox(height: 16),
+                  ButtonBar(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isRegister = false;
+                          });
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight:
+                                isRegister ? FontWeight.w400 : FontWeight.w600,
+                            color: isRegister ? Colors.black45 : Colors.black87,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            isRegister = true;
+                          });
+                        },
+                        child: Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight:
+                                isRegister ? FontWeight.w600 : FontWeight.w400,
+                            color: isRegister ? Colors.black87 : Colors.black45,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
                   _buildTextFormField('Email Address', _emailController),
                   const SizedBox(height: 8),
                   _buildTextFormField('Passord', _passwordController),
@@ -88,9 +126,9 @@ class _AuthWidgetState extends State<AuthWidget> {
                   ButtonBar(
                     alignment: MainAxisAlignment.center,
                     children: [
-                      _buildSocialbutton('assets/google.png', (){}),
-                      _buildSocialbutton('assets/face.png', (){}),
-                      _buildSocialbutton('assets/apple.png', (){})
+                      _buildSocialbutton('assets/google.png', () {}),
+                      _buildSocialbutton('assets/face.png', () {}),
+                      _buildSocialbutton('assets/apple.png', () {})
                     ],
                   )
                 ],
@@ -104,15 +142,15 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   Container _buildSocialbutton(String imagePath, VoidCallback onpressed) {
     return Container(
-      
-                      width: 50, height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25), color: Colors.white54
-                      ),
-                      child: IconButton(
-                          onPressed: onpressed,
-                          icon: Image.asset(imagePath),
-                    ),);
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25), color: Colors.white),
+      child: IconButton(
+        onPressed: onpressed,
+        icon: Image.asset(imagePath),
+      ),
+    );
   }
 
   TextFormField _buildTextFormField(
