@@ -29,7 +29,8 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +63,9 @@ class _AuthWidgetState extends State<AuthWidget> {
                       'Confirm Password', _confirmPasswordController),
                   const SizedBox(height: 16),
                   TextButton(
-                    
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                       log('good');
+                          log('good');
                         }
                       },
                       style: TextButton.styleFrom(
@@ -74,8 +74,25 @@ class _AuthWidgetState extends State<AuthWidget> {
                           backgroundColor: Colors.white54),
                       child: const Padding(
                         padding: EdgeInsets.all(15.0),
-                        child: Text('Login',style: TextStyle(color: Colors.black),),
+                        child: Text(
+                          'Login',
+                          style: TextStyle(color: Colors.black),
+                        ),
                       )),
+                  const SizedBox(height: 16),
+                  const Divider(
+                    height: 33,
+                    color: Colors.white54,
+                    thickness: 1,
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: [
+                      _buildSocialbutton('assets/google.png', (){}),
+                      _buildSocialbutton('assets/face.png', (){}),
+                      _buildSocialbutton('assets/apple.png', (){})
+                    ],
+                  )
                 ],
               ),
             ),
@@ -83,6 +100,19 @@ class _AuthWidgetState extends State<AuthWidget> {
         ),
       ),
     );
+  }
+
+  Container _buildSocialbutton(String imagePath, VoidCallback onpressed) {
+    return Container(
+      
+                      width: 50, height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25), color: Colors.white54
+                      ),
+                      child: IconButton(
+                          onPressed: onpressed,
+                          icon: Image.asset(imagePath),
+                    ),);
   }
 
   TextFormField _buildTextFormField(
@@ -98,8 +128,10 @@ class _AuthWidgetState extends State<AuthWidget> {
       style: const TextStyle(color: Colors.white),
       cursorColor: Colors.white,
       decoration: InputDecoration(
-        errorStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        errorBorder: _border.copyWith(borderSide: const BorderSide(color: Colors.black, width: 3)),
+          errorStyle:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          errorBorder: _border.copyWith(
+              borderSide: const BorderSide(color: Colors.black, width: 3)),
           filled: true,
           fillColor: Colors.black45,
           labelText: labelText,
