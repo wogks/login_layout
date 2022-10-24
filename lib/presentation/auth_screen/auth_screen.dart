@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:login_layout/util/screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends Page {
   static const pageName = 'AuthScreen';
@@ -113,6 +115,9 @@ class _AuthWidgetState extends State<AuthWidget> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           log('good');
+                          //listen:false 버튼을 이용하여 프로바이더를 사용할때는 꼭 이걸 해야함.
+                          Provider.of<ScreenNotifier>(context, listen: false)
+                              .goToMain();
                         }
                       },
                       style: TextButton.styleFrom(
@@ -171,8 +176,17 @@ class _AuthWidgetState extends State<AuthWidget> {
       String labelText, TextEditingController controller) {
     return TextFormField(
       validator: (text) {
-        if (text == null || text.isEmpty) {
+        if (controller != _confirmPasswordController &&
+            (text == null || text.isEmpty)) {
           return '입력창이 비어있어요!';
+        }
+
+        if (controller == _confirmPasswordController && isRegister) {
+          if (controller == _confirmPasswordController &&
+              isRegister &&
+              (text == null || text.isEmpty)) {
+            return '비밀번호 확인부분 다시 입력하세요';
+          }
         }
         return null; //null이 정상값
       },
