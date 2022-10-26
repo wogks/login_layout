@@ -54,11 +54,6 @@ class _AuthWidgetState extends State<AuthWidget> {
                 padding: const EdgeInsets.all(16),
                 children: [
                   const SizedBox(height: 16),
-                  CircleAvatar(
-                      backgroundColor: Colors.white54,
-                      radius: 36,
-                      child: Image.asset('assets/iconn.png')),
-                  const SizedBox(height: 16),
                   ButtonBar(
                     children: [
                       TextButton(
@@ -142,14 +137,6 @@ class _AuthWidgetState extends State<AuthWidget> {
                     color: Colors.white54,
                     thickness: 1,
                   ),
-                  ButtonBar(
-                    alignment: MainAxisAlignment.center,
-                    children: [
-                      _buildSocialbutton('assets/google.png', () {}),
-                      _buildSocialbutton('assets/face.png', () {}),
-                      _buildSocialbutton('assets/apple.png', () {})
-                    ],
-                  )
                 ].reversed.toList(),
               ),
             ),
